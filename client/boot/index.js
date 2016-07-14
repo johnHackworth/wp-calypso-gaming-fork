@@ -57,6 +57,7 @@ var config = require( 'config' ),
 	Layout;
 
 import { getSelectedSiteId, getSectionName, isSectionIsomorphic } from 'state/ui/selectors';
+import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 function init() {
 	var i18nLocaleStringsObject = null;
@@ -262,7 +263,7 @@ function reduxStoreReady( reduxStore ) {
 	page( '*', function( context, next ) {
 		if ( [ 'sb', 'sp' ].indexOf( context.querystring ) !== -1 ) {
 			layoutSection = ( context.querystring === 'sb' ) ? 'sidebar' : 'sites';
-			layoutFocus.set( layoutSection );
+			reduxStore.dispatch( setLayoutFocus( layoutSection ) );
 			page.redirect( context.pathname );
 		}
 
