@@ -9,7 +9,7 @@ import React, { PropTypes } from 'react';
 import layoutFocus from 'lib/layout-focus';
 import Gridicon from 'components/gridicon';
 
-class SidebarNavigation extends React.Component {
+class SidebarNavigationSection extends React.Component {
 	toggleSidebar( event ) {
 		event.preventDefault();
 		layoutFocus.set( 'sidebar' );
@@ -31,11 +31,11 @@ class SidebarNavigation extends React.Component {
 	}
 };
 
-SidebarNavigation.propTypes = {
+SidebarNavigationSection.propTypes = {
 	title: PropTypes.string,
 	linkClassName: PropTypes.string,
 	sectionTitle: PropTypes.string,
 	sectionName: PropTypes.string.isRequired
 };
 
-export default SidebarNavigation;
+export default SidebarNavigationSection;
