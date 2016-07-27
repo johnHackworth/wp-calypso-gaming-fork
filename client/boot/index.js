@@ -37,7 +37,6 @@ var config = require( 'config' ),
 	superProps = require( 'lib/analytics/super-props' ),
 	translatorJumpstart = require( 'lib/translator-jumpstart' ),
 	translatorInvitation = require( 'layout/community-translator/invitation-utils' ),
-	layoutFocus = require( 'lib/layout-focus' ),
 	nuxWelcome = require( 'layout/nux-welcome' ),
 	emailVerification = require( 'components/email-verification' ),
 	viewport = require( 'lib/viewport' ),
@@ -57,7 +56,7 @@ var config = require( 'config' ),
 	Layout;
 
 import { getSelectedSiteId, getSectionName, isSectionIsomorphic } from 'state/ui/selectors';
-import { setLayoutFocus } from 'state/ui/layout-focus/actions';
+import { setLayoutFocus, activateNextLayoutFocus } from 'state/ui/layout-focus/actions';
 
 function init() {
 	var i18nLocaleStringsObject = null;
@@ -296,7 +295,7 @@ function reduxStoreReady( reduxStore ) {
 
 		// Focus UI on the content on page navigation
 		if ( ! config.isEnabled( 'code-splitting' ) ) {
-			layoutFocus.next();
+			context.store.dispatch( activateNextLayoutFocus() );
 		}
 
 		// If `?welcome` is present, and `?tour` isn't, show the welcome message
