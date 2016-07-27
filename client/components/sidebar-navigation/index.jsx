@@ -2,17 +2,18 @@
  * External dependencies
  */
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 /**
  * Internal Dependencies
  */
-import layoutFocus from 'lib/layout-focus';
 import Gridicon from 'components/gridicon';
+import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 class SidebarNavigationSection extends React.Component {
 	toggleSidebar( event ) {
 		event.preventDefault();
-		layoutFocus.set( 'sidebar' );
+		this.props.setLayoutFocus( 'sidebar' );
 	}
 
 	render() {
@@ -35,7 +36,8 @@ SidebarNavigationSection.propTypes = {
 	title: PropTypes.string,
 	linkClassName: PropTypes.string,
 	sectionTitle: PropTypes.string,
-	sectionName: PropTypes.string.isRequired
+	sectionName: PropTypes.string.isRequired,
+	setLayoutFocus: PropTypes.func.isRequired,
 };
 
-export default SidebarNavigationSection;
+export default connect( null, { setLayoutFocus } )( SidebarNavigationSection );
