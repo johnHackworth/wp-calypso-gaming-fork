@@ -12,7 +12,6 @@ import Stats from './stats';
 import Publish from './publish';
 import Notifications from './notifications';
 import Gravatar from 'components/gravatar';
-import layoutFocus from 'lib/layout-focus';
 import config from 'config';
 import { preload } from 'sections-preload';
 import ResumeEditing from 'my-sites/resume-editing';
@@ -24,6 +23,7 @@ export default React.createClass( {
 		user: React.PropTypes.object,
 		sites: React.PropTypes.object,
 		section: React.PropTypes.oneOfType( [ React.PropTypes.string, React.PropTypes.bool ] ),
+		setNextLayoutFocus: React.PropTypes.func.isRequired,
 	},
 
 	getInitialState() {
@@ -34,11 +34,11 @@ export default React.createClass( {
 	},
 
 	clickMySites() {
-		layoutFocus.setNext( 'sidebar' );
+		this.props.setNextLayoutFocus( 'sidebar' );
 	},
 
 	clickReader() {
-		layoutFocus.setNext( 'content' );
+		this.props.setNextLayoutFocus( 'content' );
 	},
 
 	clickNotifications() {
