@@ -37,7 +37,7 @@ module.exports = React.createClass( {
 	},
 
 	onNavigate: function() {
-		this.props.layoutFocus.setNext( 'content' );
+		this.props.setNextLayoutFocus( 'content' );
 		window.scrollTo( 0, 0 );
 	},
 
@@ -45,7 +45,7 @@ module.exports = React.createClass( {
 		const site = this.getSelectedSite();
 		if ( site.is_previewable && ! event.metaKey && ! event.ctrlKey ) {
 			event.preventDefault();
-			this.props.layoutFocus.set( 'preview' );
+			this.props.setLayoutFocus( 'preview' );
 		}
 	},
 
@@ -484,7 +484,7 @@ module.exports = React.createClass( {
 
 	wpAdmin: function() {
 		var site = this.getSelectedSite(),
-			currentUser = this.props.user.get();
+			currentUser = this.props.currentUser;
 
 		if ( ! site.options ) {
 			return null;
@@ -651,7 +651,7 @@ module.exports = React.createClass( {
 	},
 
 	focusContent: function() {
-		this.props.layoutFocus.set( 'content' );
+		this.props.setLayoutFocus( 'content' );
 	},
 
 	addNewSite: function() {
@@ -681,7 +681,7 @@ module.exports = React.createClass( {
 				<SidebarRegion>
 				<CurrentSite
 					sites={ this.props.sites }
-					siteCount={ this.props.user.get().visible_site_count }
+					siteCount={ this.props.currentUser.visible_site_count }
 					onClick={ this.onPreviewSite }
 				/>
 				<SidebarMenu>

@@ -19,7 +19,9 @@ const SitePicker = React.createClass( {
 
 	propTypes: {
 		onClose: React.PropTypes.func,
-		layoutFocus: React.PropTypes.object
+		currentLayoutFocus: React.PropTypes.string,
+		setNextLayoutFocus: React.PropTypes.func.isRequired,
+		setLayoutFocus: React.PropTypes.func.isRequired,
 	},
 
 	getInitialState: function() {
@@ -35,11 +37,11 @@ const SitePicker = React.createClass( {
 	},
 
 	componentWillReceiveProps: function( nextProps ) {
-		if ( ! nextProps.layoutFocus || hasTouch() ) {
+		if ( ! nextProps.currentLayoutFocus || hasTouch() ) {
 			return;
 		}
 
-		const isAutoFocused = nextProps.layoutFocus.getCurrent() === 'sites';
+		const isAutoFocused = this.props.currentLayoutFocus === 'sites';
 		if ( isAutoFocused !== this.state.isAutoFocused ) {
 			this.setState( { isAutoFocused } );
 		}
@@ -51,7 +53,7 @@ const SitePicker = React.createClass( {
 		} else {
 			// We use setNext here, because on mobile we want to show sidebar
 			// instead of Stats page after picking a site
-			this.props.layoutFocus.setNext( 'sidebar' );
+			this.props.setNextLayoutFocus( 'sidebar' );
 			this.scrollToTop();
 		}
 		this.props.onClose( event );
@@ -63,8 +65,8 @@ const SitePicker = React.createClass( {
 	},
 
 	closePicker: function() {
-		if ( this.props.layoutFocus && this.props.layoutFocus.getCurrent() === 'sites' ) {
-			this.props.layoutFocus.set( 'sidebar' );
+		if ( this.props.currentLayoutFocus === 'sites' ) {
+			this.props.setLayoutFocus( 'sidebar' );
 			this.scrollToTop();
 		}
 	},
@@ -83,7 +85,6 @@ const SitePicker = React.createClass( {
 				sites={ this.props.sites }
 				allSitesPath={ this.props.allSitesPath }
 				siteBasePath={ this.props.siteBasePath }
-				user={ this.props.user }
 				autoFocus={ this.state.isAutoFocused }
 				onClose={ this.onClose }
 				groups={ true }
