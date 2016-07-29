@@ -14,7 +14,6 @@ import i18n from 'i18n-calypso';
 import sitesList from 'lib/sites-list';
 import PeopleList from './main';
 import EditTeamMember from './edit-team-member-form';
-import layoutFocus from 'lib/layout-focus';
 import analytics from 'lib/analytics';
 import titlecase from 'to-title-case';
 import UsersStore from 'lib/users/store';
@@ -23,6 +22,8 @@ import PeopleLogStore from 'lib/people/log-store';
 import titleActions from 'lib/screen-title/actions';
 import InvitePeople from './invite-people';
 import { renderWithReduxStore } from 'lib/react-helpers';
+import { getCurrentLayoutFocus } from 'state/ui/layout-focus/selectors';
+import { setNextLayoutFocus } from 'state/ui/layout-focus/actions';
 
 /**
  * Module variables
@@ -30,9 +31,10 @@ import { renderWithReduxStore } from 'lib/react-helpers';
 const sites = sitesList();
 
 export default {
-	redirectToTeam() {
+	redirectToTeam( context ) {
 		// if we are redirecting we need to retain our intended layout-focus
-		layoutFocus.setNext( layoutFocus.getCurrent() );
+		const currentLayoutFocus = getCurrentLayoutFocus( context.store.getState() );
+		context.store.dispatch( setNextLayoutFocus( currentLayoutFocus ) );
 		page.redirect( '/people/team' );
 	},
 
@@ -40,7 +42,7 @@ export default {
 		const siteId = route.getSiteFragment( context.path );
 
 		if ( ! siteId ) {
-			this.redirectToTeam();
+			this.redirectToTeam( context );
 		}
 
 		next();
@@ -84,7 +86,8 @@ function renderInvitePeople( context ) {
 	}
 
 	if ( isJetpack ) {
-		layoutFocus.setNext( layoutFocus.getCurrent() );
+		const currentLayoutFocus = getCurrentLayoutFocus( context.store.getState() );
+		context.store.dispatch( setNextLayoutFocus( currentLayoutFocus ) );
 		page.redirect( '/people/team/' + site.slug );
 		analytics.tracks.recordEvent( 'calypso_invite_people_controller_redirect_to_team' );
 	}
@@ -125,7 +128,8 @@ function renderSingleTeamMember( context ) {
 					log => siteId === log.siteId && 'RECEIVE_USER_FAILED' === log.action && userLogin === log.user
 				);
 				if ( fetchUserError.length ) {
-					layoutFocus.setNext( layoutFocus.getCurrent() );
+					const currentLayoutFocus = getCurrentLayoutFocus( context.store.getState() );
+					context.store.dispatch( setNextLayoutFocus( currentLayoutFocus ) );
 					page.redirect( '/people/team/' + site.slug );
 				}
 			} );
