@@ -13,7 +13,7 @@ import PopoverMenuItem from 'components/popover/menu-item';
 import { mc } from 'lib/analytics';
 import { getPost, getPostPreviewUrl } from 'state/posts/selectors';
 import { setPreviewUrl } from 'state/ui/actions';
-import layoutFocus from 'lib/layout-focus';
+import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 class PostActionsEllipsisMenuView extends Component {
 	static propTypes = {
@@ -21,7 +21,8 @@ class PostActionsEllipsisMenuView extends Component {
 		translate: PropTypes.func.isRequired,
 		status: PropTypes.string,
 		previewUrl: PropTypes.string,
-		setPreviewUrl: PropTypes.func.isRequired
+		setPreviewUrl: PropTypes.func.isRequired,
+		setLayoutFocus: PropTypes.func.isRequired,
 	};
 
 	constructor() {
@@ -33,7 +34,7 @@ class PostActionsEllipsisMenuView extends Component {
 	previewPost( event ) {
 		this.props.setPreviewUrl( this.props.previewUrl );
 		mc.bumpStat( 'calypso_cpt_actions', 'view' );
-		layoutFocus.set( 'preview' );
+		this.props.setLayoutFocus( 'preview' );
 		event.preventDefault();
 	}
 
@@ -65,5 +66,5 @@ export default connect(
 			previewUrl: post ? getPostPreviewUrl( state, post.site_ID, post.ID ) : null
 		};
 	},
-	{ setPreviewUrl }
+	{ setPreviewUrl, setLayoutFocus }
 )( localize( PostActionsEllipsisMenuView ) );
