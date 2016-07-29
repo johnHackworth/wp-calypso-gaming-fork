@@ -11,6 +11,11 @@ import Gridicon from 'components/gridicon';
 import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 class SidebarNavigationSection extends React.Component {
+	constructor( props ) {
+		super( props );
+		this.toggleSidebar = this.toggleSidebar.bind( this );
+	}
+
 	toggleSidebar( event ) {
 		event.preventDefault();
 		this.props.setLayoutFocus( 'sidebar' );
