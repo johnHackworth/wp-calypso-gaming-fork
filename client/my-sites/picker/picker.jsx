@@ -41,7 +41,7 @@ const SitePicker = React.createClass( {
 			return;
 		}
 
-		const isAutoFocused = this.props.currentLayoutFocus === 'sites';
+		const isAutoFocused = nextProps.currentLayoutFocus === 'sites';
 		if ( isAutoFocused !== this.state.isAutoFocused ) {
 			this.setState( { isAutoFocused } );
 		}
