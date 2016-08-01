@@ -9,7 +9,6 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
  */
 import noticesMiddleware from './notices/middleware';
 import postsEditMiddleware from './posts/middleware';
-import layoutFocusMiddleware from './ui/layout-focus/middleware';
 import application from './application/reducer';
 import comments from './comments/reducer';
 import componentsUsageStats from './components-usage-stats/reducer';
@@ -83,7 +82,7 @@ export const reducer = combineReducers( {
 	wordads
 } );
 
-const middleware = [ thunkMiddleware, noticesMiddleware, postsEditMiddleware, layoutFocusMiddleware ];
+const middleware = [ thunkMiddleware, noticesMiddleware, postsEditMiddleware ];
 
 if ( typeof window === 'object' ) {
 	// Browser-specific middlewares
