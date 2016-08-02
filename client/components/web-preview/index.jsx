@@ -227,7 +227,7 @@ export class WebPreview extends Component {
 								/>
 							}
 							{ 'seo' === this.state.device &&
-								<SeoPreviewPane type="site" siteId="" postId="" pageId=""/>
+								<SeoPreviewPane />
 							}
 						</div>
 					</div>

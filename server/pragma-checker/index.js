@@ -19,7 +19,12 @@ var IGNORED_MODULES = [
 	'lib/upgrades/actions', // nooped on the server as it still uses the singleton Flux architecture
 	'i18n-calypso', // ignore this until we make it work properly on the server
 	'my-sites/themes/thanks-modal', // stubbed on the server until we develop an isomorphic version
-	'my-sites/themes/themes-site-selector-modal' // stubbed on the server until we develop an isomorphic version
+	'my-sites/themes/themes-site-selector-modal', // stubbed on the server until we develop an isomorphic version
+	'components/web-preview', // stubbed on the server until all the dependencies are @ssr-ready
+	'components/seo-preview-pane', // stubbed on the server until all the dependencies are @ssr-ready
+	'reader/stream/post', // stubbed on the server until all the dependencies are @ssr-ready
+	'state/ui/editor/selectors', // stubbed on the server until all the dependencies are @ssr-ready
+	'state/posts/selectors', // stubbed on the server until all the dependencies are @ssr-ready
 ];
 
 function PragmaCheckPlugin( options ) {
