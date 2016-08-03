@@ -46,6 +46,16 @@ export function getSectionName( state ) {
 }
 
 /**
+ * Returns the current section group name.
+ *
+ * @param  {Object}  state Global state tree
+ * @return {?String}       Current section group name
+ */
+export function getGroupName( state ) {
+	return get( state.ui.section, 'group', null );
+}
+
+/**
  * Returns whether a section is loading.
  *
  * @param  {Object}  state Global state tree

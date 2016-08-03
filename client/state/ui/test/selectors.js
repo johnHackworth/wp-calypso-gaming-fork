@@ -10,6 +10,7 @@ import {
 	getSelectedSite,
 	getSelectedSiteId,
 	getSectionName,
+	getGroupName,
 	isSectionIsomorphic,
 	hasSidebar
 } from '../selectors';
@@ -89,6 +90,34 @@ describe( 'selectors', () => {
 			} );
 
 			expect( sectionName ).to.equal( 'post-editor' );
+		} );
+	} );
+
+	describe( '#getGroupName()', () => {
+		it( 'should return null if no section is assigned', () => {
+			const sectionName = getGroupName( {
+				ui: {
+					section: false
+				}
+			} );
+
+			expect( sectionName ).to.be.null;
+		} );
+
+		it( 'should return the name of the current section', () => {
+			const sectionName = getGroupName( {
+				ui: {
+					section: {
+						name: 'post-editor',
+						paths: [ '/post', '/page' ],
+						module: 'post-editor',
+						group: 'editor',
+						secondary: true
+					}
+				}
+			} );
+
+			expect( sectionName ).to.equal( 'editor' );
 		} );
 	} );
 
