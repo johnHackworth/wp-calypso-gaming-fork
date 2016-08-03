@@ -28,4 +28,4 @@ const MobileBackToSidebar = React.createClass( {
 	}
 } );
 
-module.exports = connect( null, { setLayoutFocus } )( MobileBackToSidebar );
+export default connect( null, { setLayoutFocus } )( MobileBackToSidebar );
