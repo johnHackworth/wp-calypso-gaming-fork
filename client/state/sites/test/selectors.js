@@ -6,6 +6,8 @@ import { expect } from 'chai';
 /**
  * Internal dependencies
  */
+import config from 'config';
+import { useSandbox } from 'test/helpers/use-sinon';
 import {
 	getSite,
 	getSiteCollisions,
@@ -15,6 +17,7 @@ import {
 	isJetpackModuleActive,
 	isJetpackMinimumVersion,
 	getSiteSlug,
+	isSitePreviewable,
 	isRequestingSites,
 	isRequestingSite,
 	getSiteByUrl,
@@ -414,6 +417,118 @@ describe( 'selectors', () => {
 			}, 77203199 );
 
 			expect( slug ).to.equal( 'testtwosites2014.wordpress.com::path::to::site' );
+		} );
+	} );
+
+	describe( 'isSitePreviewable()', () => {
+		context( 'config disabled', () => {
+			useSandbox( ( sandbox ) => {
+				sandbox.stub( config, 'isEnabled' ).withArgs( 'preview-layout' ).returns( false );
+			} );
+
+			it( 'should return false', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {
+							77203199: {
+								ID: 77203199,
+								URL: 'https://example.com',
+								options: {
+									unmapped_url: 'https://example.wordpress.com'
+								}
+							}
+						}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.false;
+			} );
+		} );
+
+		context( 'config enabled', () => {
+			useSandbox( ( sandbox ) => {
+				sandbox.stub( config, 'isEnabled' ).withArgs( 'preview-layout' ).returns( true );
+			} );
+
+			it( 'should return null if the site is not known', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.null;
+			} );
+
+			it( 'should return false if the site is VIP', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {
+							77203199: {
+								ID: 77203199,
+								URL: 'https://example.com',
+								is_vip: true,
+								options: {
+									unmapped_url: 'https://example.wordpress.com'
+								}
+							}
+						}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.false;
+			} );
+
+			it( 'should return false if the site unmapped URL is unknown', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {
+							77203199: {
+								ID: 77203199,
+								URL: 'https://example.com'
+							}
+						}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.false;
+			} );
+
+			it( 'should return false if the site unmapped URL is non-HTTPS', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {
+							77203199: {
+								ID: 77203199,
+								URL: 'http://example.com',
+								options: {
+									unmapped_url: 'http://example.com'
+								}
+							}
+						}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.false;
+			} );
+
+			it( 'should return true if the site unmapped URL is HTTPS', () => {
+				const isPreviewable = isSitePreviewable( {
+					sites: {
+						items: {
+							77203199: {
+								ID: 77203199,
+								URL: 'https://example.com',
+								options: {
+									unmapped_url: 'https://example.wordpress.com'
+								}
+							}
+						}
+					}
+				}, 77203199 );
+
+				expect( isPreviewable ).to.be.true;
+			} );
 		} );
 	} );
 

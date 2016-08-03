@@ -17,6 +17,12 @@ import {
 /**
  * Internal dependencies
  */
+import config from 'config';
+import { isHttps } from 'lib/url';
+
+/**
+ * Internal dependencies
+ */
 import createSelector from 'lib/create-selector';
 import { fromApi as seoTitleFromApi } from 'components/seo/meta-title-editor/mappings';
 import versionCompare from 'lib/version-compare';
@@ -155,6 +161,33 @@ export function getSiteSlug( state, siteId ) {
 	}
 
 	return site.URL.replace( /^https?:\/\//, '' ).replace( /\//g, '::' );
+}
+
+/**
+ * Returns true if the site can be previewed, false if the site cannot be
+ * previewed, or null if preview ability cannot be determined. This indicates
+ * whether it is safe to embed iframe previews for the site.
+ *
+ * @param  {Object}   state  Global state tree
+ * @param  {Number}   siteId Site ID
+ * @return {?Boolean}        Whether site is previewable
+ */
+export function isSitePreviewable( state, siteId ) {
+	if ( ! config.isEnabled( 'preview-layout' ) ) {
+		return false;
+	}
+
+	const site = getSite( state, siteId );
+	if ( ! site ) {
+		return null;
+	}
+
+	if ( site.is_vip ) {
+		return false;
+	}
+
+	const unmappedUrl = getSiteOption( state, siteId, 'unmapped_url' );
+	return !! unmappedUrl && isHttps( unmappedUrl );
 }
 
 /**
