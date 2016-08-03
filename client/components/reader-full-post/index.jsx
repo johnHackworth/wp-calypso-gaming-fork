@@ -11,8 +11,6 @@ import { translate } from 'i18n-calypso';
  */
 import ReaderMain from 'components/reader-main';
 import Button from 'components/button';
-import Gravatar from 'components/gravatar';
-import StickyPanel from 'components/sticky-panel';
 import Gridicon from 'components/gridicon';
 import { setSection } from 'state/ui/actions';
 import smartSetState from 'lib/react-smart-set-state';
@@ -24,6 +22,7 @@ import { fetch as fetchSite } from 'lib/reader-site-store/actions';
 import { fetchPost } from 'lib/feed-post-store/actions';
 import ReaderFullPostHeader from './header';
 import AuthorCompactProfile from 'blocks/author-compact-profile';
+import StickyPanel from 'components/sticky-panel';
 
 export class FullPostView extends React.Component {
 	constructor( props ) {
@@ -40,21 +39,21 @@ export class FullPostView extends React.Component {
 		/*eslint-disable react/no-danger*/
 		return (
 			<ReaderMain className="reader-full-post">
-				<StickyPanel className="reader-full-post__back-container">
+				<div className="reader-full-post__back-container">
 					<Button className="reader-full-post__back" borderless compact onClick={ this.handleBack }>
 						<Gridicon icon="arrow-left" /> { translate( 'Back' ) }
 					</Button>
-				</StickyPanel>
+				</div>
 				<div className="reader-full-post__content">
 					<div className="reader-full-post__sidebar">
 						<StickyPanel>
-						<AuthorCompactProfile
-							author={ post.author }
-							siteName={ post.site_name }
-							siteUrl= { post.site_URL }
-							followCount={ site && site.subscribers_count }
-							feedId={ post.feed_ID }
-							siteId={ post.site_ID } />
+							<AuthorCompactProfile
+								author={ post.author }
+								siteName={ post.site_name }
+								siteUrl= { post.site_URL }
+								followCount={ site && site.subscribers_count }
+								feedId={ post.feed_ID }
+								siteId={ post.site_ID } />
 						</StickyPanel>
 					</div>
 					<div className="reader-full-post__story">
