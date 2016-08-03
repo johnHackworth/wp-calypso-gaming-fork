@@ -1,10 +1,11 @@
 /**
  * Internal dependencies
  */
-import { DOCUMENT_HEAD_TITLE_SET, DOCUMENT_HEAD_UNREAD_COUNT_SET } from 'state/action-types';
+import { DOCUMENT_HEAD_TITLE_SET, DOCUMENT_HEAD_UNREAD_COUNT_SET, SELECTED_SITE_SET } from 'state/action-types';
 import { decodeEntities } from 'lib/formatting';
 import { getTitle, getUnreadCount } from './selectors';
 import { getSelectedSite } from 'state/ui/selectors';
+import { getSite } from 'state/sites/selectors';
 
 /**
  * Middleware that updates the screen title when a title updating action is
@@ -32,6 +33,17 @@ export default ( { getState } ) => ( next ) => ( action ) => {
 				getTitle( getState() ),
 				action.count,
 				getSelectedSite( getState() )
+			);
+			if ( formattedTitle !== document.title ) {
+				document.title = formattedTitle;
+			}
+			break;
+
+		case SELECTED_SITE_SET:
+			formattedTitle = getFormattedTitle(
+				getTitle( getState() ),
+				getUnreadCount( getState() ),
+				getSite( getState(), action.siteId )
 			);
 			if ( formattedTitle !== document.title ) {
 				document.title = formattedTitle;

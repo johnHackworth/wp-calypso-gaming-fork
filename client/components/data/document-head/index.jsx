@@ -16,7 +16,6 @@ import {
 	addDocumentHeadMeta as addMeta,
 	setDocumentHeadUnreadCount as setUnreadCount
 } from 'state/document-head/actions';
-import { getSelectedSiteId } from 'state/ui/selectors';
 
 class DocumentHead extends Component {
 	componentWillMount() {
@@ -35,14 +34,6 @@ class DocumentHead extends Component {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( this.props.title !== nextProps.title ) {
-			this.props.setTitle( nextProps.title );
-		}
-
-		// [TEMPORARY][TODO]: We should only check site ID so long as we need
-		// maintain two separate title implementations. When titles are managed
-		// exclusively through Redux state and title is updated in response to
-		// change in site state, this can be removed.
-		if ( this.props.siteId !== nextProps.siteId ) {
 			this.props.setTitle( nextProps.title );
 		}
 
@@ -78,7 +69,6 @@ DocumentHead.propTypes = {
 	unreadCount: PropTypes.number,
 	link: PropTypes.array,
 	meta: PropTypes.array,
-	siteId: PropTypes.number,
 	setTitle: PropTypes.func.isRequired,
 	setDescription: PropTypes.func.isRequired,
 	addLink: PropTypes.func.isRequired,
@@ -93,11 +83,7 @@ DocumentHead.defaultProps = {
 };
 
 export default connect(
-	( state ) => {
-		return {
-			siteId: getSelectedSiteId( state )
-		};
-	},
+	null,
 	{
 		setTitle,
 		setDescription,
