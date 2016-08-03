@@ -1,11 +1,18 @@
 /**
+ * External dependencies
+ */
+import { includes } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import { DOCUMENT_HEAD_TITLE_SET, DOCUMENT_HEAD_UNREAD_COUNT_SET, SELECTED_SITE_SET } from 'state/action-types';
 import { decodeEntities } from 'lib/formatting';
 import { getTitle, getUnreadCount } from './selectors';
-import { getSelectedSite } from 'state/ui/selectors';
+import { getSelectedSite, getGroupName } from 'state/ui/selectors';
 import { getSite } from 'state/sites/selectors';
+
+const siteSpecificGroups = [ 'sites', 'editor' ];
 
 /**
  * Middleware that updates the screen title when a title updating action is
@@ -21,7 +28,8 @@ export default ( { getState } ) => ( next ) => ( action ) => {
 			formattedTitle = getFormattedTitle(
 				action.title,
 				getUnreadCount( getState() ),
-				getSelectedSite( getState() )
+				// Display site name as title part only if we're in 'My Sites'
+				includes( siteSpecificGroups, getGroupName( getState() ) ) && getSelectedSite( getState() )
 			);
 			if ( formattedTitle !== document.title ) {
 				document.title = formattedTitle;
@@ -32,7 +40,8 @@ export default ( { getState } ) => ( next ) => ( action ) => {
 			formattedTitle = getFormattedTitle(
 				getTitle( getState() ),
 				action.count,
-				getSelectedSite( getState() )
+				// Display site name as title part only if we're in 'My Sites'
+				includes( siteSpecificGroups, getGroupName( getState() ) ) && getSelectedSite( getState() )
 			);
 			if ( formattedTitle !== document.title ) {
 				document.title = formattedTitle;
