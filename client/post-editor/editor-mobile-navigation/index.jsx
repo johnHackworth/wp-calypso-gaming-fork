@@ -1,14 +1,14 @@
 /**
  * External dependencies
  */
-const React = require( 'react' );
+import React from 'react';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-const Site = require( 'blocks/site' );
-const Gridicon = require( 'components/gridicon' );
+import Site from 'blocks/site';
+import Gridicon from 'components/gridicon';
 import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 const EditorMobileNavigation = React.createClass( {
