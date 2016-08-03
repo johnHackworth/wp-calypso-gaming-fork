@@ -13,18 +13,20 @@ import Button from 'components/button';
 import { abtest } from 'lib/abtest';
 import { localize } from 'i18n-calypso';
 
+function redirectToPartner() {
+	if ( 'bluehostWithWoo' === abtest( 'signupStoreBenchmarking' ) ) {
+		window.location.href = 'https://www.bluehost.com/web-hosting/signup?flow=woocommerce';
+	} else {
+		window.location.href = 'https://www.bluehost.com/wordpress';
+	}
+}
+
+function getPrice() {
+	return 'bluehost' === abtest( 'signupStoreBenchmarking' ) ? '$3.95' : '$12.95';
+}
+
 export const BluehostStoreStep = props => {
 	const { translate } = props;
-
-	const redirectToPartner = () => {
-		if ( 'bluehostWithWoo' === abtest( 'signupStoreBenchmarking' ) ) {
-			window.location.href = 'https://www.bluehost.com/web-hosting/signup?flow=woocommerce';
-		} else {
-			window.location.href = 'https://www.bluehost.com/wordpress';
-		}
-	};
-
-	const getPrice = () => ( 'bluehost' === abtest( 'signupStoreBenchmarking' ) ) ? '$3.95' : '$12.95';
 
 	return (
 		<div>

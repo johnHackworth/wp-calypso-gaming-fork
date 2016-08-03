@@ -14,10 +14,12 @@ import { localize } from 'i18n-calypso';
 
 import SitegroundLogo from './siteground-logo';
 
+function redirectToPartner() {
+	window.location.href = 'https://www.siteground.com/woocommerce/step1.htm';
+}
+
 export const SitegroundStoreStep = props => {
 	const { translate } = props;
-
-	const redirectToPartner = () => window.location.href = 'https://www.siteground.com/woocommerce/step1.htm';
 
 	return (
 		<div>
