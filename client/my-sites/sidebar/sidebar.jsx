@@ -8,6 +8,8 @@ var analytics = require( 'lib/analytics' ),
 	includes = require( 'lodash/includes' ),
 	React = require( 'react' );
 
+import { connect } from 'react-redux';
+
 /**
  * Internal dependencies
  */
@@ -28,9 +30,17 @@ import Button from 'components/button';
 import SidebarButton from 'layout/sidebar/button';
 import SidebarFooter from 'layout/sidebar/footer';
 import { isPersonal, isPremium, isBusiness } from 'lib/products-values';
+import { getCurrentUser } from 'state/current-user/selectors';
+import { setNextLayoutFocus, setLayoutFocus } from 'state/ui/layout-focus/actions';
 
-module.exports = React.createClass( {
-	displayName: 'MySitesSidebar',
+const MySitesSidebar = React.createClass( {
+	propTypes: {
+		setNextLayoutFocus: React.PropTypes.func.isRequired,
+		setLayoutFocus: React.PropTypes.func.isRequired,
+		path: React.PropTypes.string,
+		sites: React.PropTypes.object,
+		currentUser: React.PropTypes.object,
+	},
 
 	componentDidMount: function() {
 		debug( 'The sidebar React component is mounted.' );
@@ -748,3 +758,11 @@ module.exports = React.createClass( {
 		);
 	}
 } );
+
+function mapStateToProps( state ) {
+	return {
+		currentUser: getCurrentUser( state ),
+	};
+}
+
+export default connect( mapStateToProps, { setNextLayoutFocus, setLayoutFocus } )( MySitesSidebar );
