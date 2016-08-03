@@ -765,4 +765,5 @@ function mapStateToProps( state ) {
 	};
 }
 
-export default connect( mapStateToProps, { setNextLayoutFocus, setLayoutFocus } )( MySitesSidebar );
+// TODO: make this pure when sites can be retrieved from the Redux state
+export default connect( mapStateToProps, { setNextLayoutFocus, setLayoutFocus }, null, { pure: false } )( MySitesSidebar );
