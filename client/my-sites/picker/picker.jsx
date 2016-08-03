@@ -1,16 +1,19 @@
 /**
  * External dependencies
  */
-var React = require( 'react' ),
-	wrapWithClickOutside = require( 'react-click-outside' ),
-	noop = require( 'lodash/noop' ),
-	closeOnEsc = require( 'lib/mixins/close-on-esc' );
+import React from 'react';
+import wrapWithClickOutside from 'react-click-outside';
+import noop from 'lodash/noop';
+import closeOnEsc from 'lib/mixins/close-on-esc';
+import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-var SiteSelector = require( 'components/site-selector' ),
-	hasTouch = require( 'lib/touch-detect' ).hasTouch;
+import SiteSelector from 'components/site-selector';
+import { hasTouch } from 'lib/touch-detect';
+import { getCurrentLayoutFocus } from 'state/ui/layout-focus/selectors';
+import { setNextLayoutFocus, setLayoutFocus } from 'state/ui/layout-focus/actions';
 
 const SitePicker = React.createClass( {
 	displayName: 'SitePicker',
@@ -93,4 +96,10 @@ const SitePicker = React.createClass( {
 	}
 } );
 
-module.exports = wrapWithClickOutside( SitePicker );
+function mapStateToProps( state ) {
+	return {
+		currentLayoutFocus: getCurrentLayoutFocus( state ),
+	};
+}
+
+export default connect( mapStateToProps, { setNextLayoutFocus, setLayoutFocus } )( wrapWithClickOutside( SitePicker ) );
