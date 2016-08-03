@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import Gridicon from 'components/gridicon';
 import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 
-class SidebarNavigationSection extends React.Component {
+class SidebarNavigation extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.toggleSidebar = this.toggleSidebar.bind( this );
@@ -37,7 +37,7 @@ class SidebarNavigationSection extends React.Component {
 	}
 };
 
-SidebarNavigationSection.propTypes = {
+SidebarNavigation.propTypes = {
 	title: PropTypes.string,
 	linkClassName: PropTypes.string,
 	sectionTitle: PropTypes.string,
@@ -45,4 +45,4 @@ SidebarNavigationSection.propTypes = {
 	setLayoutFocus: PropTypes.func.isRequired,
 };
 
-export default connect( null, { setLayoutFocus } )( SidebarNavigationSection );
+export default connect( null, { setLayoutFocus } )( SidebarNavigation );
