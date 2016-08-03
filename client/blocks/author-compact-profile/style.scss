@@ -18,10 +18,15 @@
     	.follow-button__label {
     		color: $blue-medium;
 
+
     		@include breakpoint( "<660px" ) {
     			display: inline-block;
     		}
     	}
+
+			&.is-following .follow-button__label {
+				color: $alert-green;
+			}
 
 		&:hover {
 

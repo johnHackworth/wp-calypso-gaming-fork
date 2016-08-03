@@ -1,5 +1,7 @@
 .reader-full-post.main {
 	max-width: none;
+	backface-visibility: visible;
+	perspective: none;
 }
 .reader-full-post__content {
 	@media only screen and ( min-width: 1281px ) {
@@ -27,6 +29,16 @@
 	left: 32px;
 
 	@media only screen and ( max-width: 660px ) {
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 34px;
+		padding-top: 12px;
+		padding-left: 20px;
+		background: #fff;
+		border-bottom: 1px solid $gray-light;
+		margin-top: 0;
+		z-index: z-index( '.masterbar', '.reader-back'  );
 	}
 }
 
@@ -56,6 +68,17 @@
 	@media only screen and ( max-width: 1040px ) {
 		flex-grow: 1;
 		flex-shrink: 1;
+	}
+}
+
+.reader-full-post .author-compact-profile {
+	@media only screen and ( max-width: 660px ) {
+		.author-compact-profile__follow .follow-button {
+			position: fixed;
+			top: 13px;
+			right: 100px;
+			z-index: z-index( '.masterbar', '.reader-back'  );
+		}
 	}
 }
 
