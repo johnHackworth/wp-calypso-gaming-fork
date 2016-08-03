@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ReactDom from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 
 /**
  * Internal dependencies
@@ -26,19 +27,21 @@ export default {
 		trackPageLoad( basePath, fullAnalyticsPageTitle, mcKey );
 
 		ReactDom.render(
-			React.createElement( LikedPostsStream, {
-				key: 'liked',
-				store: likedPostsStore,
-				setPageTitle: setPageTitle,
-				trackScrollPage: trackScrollPage.bind(
-					null,
-					basePath,
-					fullAnalyticsPageTitle,
-					analyticsPageTitle,
-					mcKey
-				),
-				onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey )
-			} ),
+			React.createElement( ReduxProvider, { store: context.store },
+				React.createElement( LikedPostsStream, {
+					key: 'liked',
+					store: likedPostsStore,
+					setPageTitle: setPageTitle,
+					trackScrollPage: trackScrollPage.bind(
+						null,
+						basePath,
+						fullAnalyticsPageTitle,
+						analyticsPageTitle,
+						mcKey
+					),
+					onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey )
+				} )
+			),
 			document.getElementById( 'primary' )
 		);
 	}

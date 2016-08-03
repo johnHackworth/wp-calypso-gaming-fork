@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ReactDom from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import i18n from 'i18n-calypso';
 
 /**
@@ -17,7 +18,7 @@ import feedStreamFactory from 'lib/feed-stream-store';
 const ANALYTICS_PAGE_TITLE = 'Reader';
 
 export default {
-	recommendedForYou() {
+	recommendedForYou( context ) {
 		const RecommendedForYou = require( 'reader/recommendations/for-you' ),
 			basePath = '/recommendations',
 			fullAnalyticsPageTitle = ANALYTICS_PAGE_TITLE + ' > Recommended Sites For You',
@@ -62,19 +63,21 @@ export default {
 		trackPageLoad( basePath, fullAnalyticsPageTitle, mcKey );
 
 		ReactDom.render(
-			React.createElement( RecommendedPostsStream, {
-				key: 'recommendations_posts',
-				store: RecommendedPostsStore,
-				trackScrollPage: trackScrollPage.bind(
-					null,
-					basePath,
-					fullAnalyticsPageTitle,
-					ANALYTICS_PAGE_TITLE,
-					mcKey
-				),
-				onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
-				showBack: userHasHistory( context )
-			} ),
+			React.createElement( ReduxProvider, { store: context.store },
+				React.createElement( RecommendedPostsStream, {
+					key: 'recommendations_posts',
+					store: RecommendedPostsStore,
+					trackScrollPage: trackScrollPage.bind(
+						null,
+						basePath,
+						fullAnalyticsPageTitle,
+						ANALYTICS_PAGE_TITLE,
+						mcKey
+					),
+					onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
+					showBack: userHasHistory( context )
+				} )
+			),
 			document.getElementById( 'primary' )
 		);
 	}

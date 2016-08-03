@@ -51,7 +51,7 @@ var abtest = require( 'lib/abtest' ).abtest,
 	showReaderFullPost = require( 'state/ui/reader/fullpost/actions' ).showReaderFullPost,
 	smartSetState = require( 'lib/react-smart-set-state' ),
 	scrollTo = require( 'lib/scroll-to' ),
-	setTitle = require( 'state/document-head/actions' ).setTitle;
+	setTitle = require( 'state/document-head/actions' ).setDocumentHeadTitle;
 
 import PostExcerpt from 'components/post-excerpt';
 import { getPostTotalCommentsCount } from 'state/comments/selectors';

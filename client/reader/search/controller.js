@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ReactDom from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import page from 'page';
 import qs from 'qs';
 
@@ -39,27 +40,29 @@ export default {
 		}
 
 		ReactDom.render(
-			React.createElement( SearchStream, {
-				key: 'search',
-				store: store,
-				query: searchSlug,
-				trackScrollPage: trackScrollPage.bind(
-					null,
-					basePath,
-					fullAnalyticsPageTitle,
-					analyticsPageTitle,
-					mcKey
-				),
-				onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
-				showBack: false,
-				onQueryChange: function( newValue ) {
-					let searchUrl = '/read/search';
-					if ( newValue ) {
-						searchUrl += '?' + qs.stringify( { q: newValue } );
+			React.createElement( ReduxProvider, { store: context.store },
+				React.createElement( SearchStream, {
+					key: 'search',
+					store: store,
+					query: searchSlug,
+					trackScrollPage: trackScrollPage.bind(
+						null,
+						basePath,
+						fullAnalyticsPageTitle,
+						analyticsPageTitle,
+						mcKey
+					),
+					onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
+					showBack: false,
+					onQueryChange: function( newValue ) {
+						let searchUrl = '/read/search';
+						if ( newValue ) {
+							searchUrl += '?' + qs.stringify( { q: newValue } );
+						}
+						page.replace( searchUrl );
 					}
-					page.replace( searchUrl );
-				}
-			} ),
+				} )
+			),
 			document.getElementById( 'primary' )
 		);
 	}
