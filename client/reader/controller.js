@@ -195,7 +195,7 @@ module.exports = {
 		trackPageLoad( basePath, fullAnalyticsPageTitle, mcKey );
 		recordTrack( 'calypso_reader_following_loaded' );
 
-		setPageTitle( i18n.translate( 'Following' ) );
+		setPageTitle( context, i18n.translate( 'Following' ) );
 
 		ReactDom.render(
 			React.createElement( ReduxProvider, { store: context.store },
@@ -252,7 +252,6 @@ module.exports = {
 				key: 'feed-' + context.params.feed_id,
 				store: feedStore,
 				feedId: context.params.feed_id,
-				setPageTitle: setPageTitle,
 				trackScrollPage: trackScrollPage.bind(
 					null,
 					basePath,
@@ -287,7 +286,6 @@ module.exports = {
 				key: 'site-' + context.params.blog_id,
 				store: feedStore,
 				siteId: context.params.blog_id,
-				setPageTitle: setPageTitle,
 				trackScrollPage: trackScrollPage.bind(
 					null,
 					basePath,
@@ -319,7 +317,7 @@ module.exports = {
 
 		trackPageLoad( basePath, fullAnalyticsPageTitle, mcKey );
 
-		setPageTitle( 'Automattic' );
+		setPageTitle( context, 'Automattic' );
 
 		ReactDom.render(
 			React.createElement( ReduxProvider, { store: context.store },

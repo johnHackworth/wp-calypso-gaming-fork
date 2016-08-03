@@ -29,7 +29,7 @@ let __lastTitle = null;
 function renderPostNotFound() {
 	const sidebarAndPageTitle = i18n.translate( 'Post not found' );
 
-	setPageTitle( sidebarAndPageTitle );
+	setPageTitle( context, sidebarAndPageTitle );
 
 	ReactDom.render(
 		<FeedError sidebarTitle={ sidebarAndPageTitle } message={ i18n.translate( 'Post Not Found' ) } />,
@@ -67,7 +67,6 @@ export function blogPost( context ) {
 				blogId: blogId,
 				postId: postId,
 				context: context,
-				setPageTitle: setPageTitle,
 				onClose: function() {
 					page.back( context.lastRoute || '/' );
 				},
@@ -130,7 +129,6 @@ export function feedPost( context ) {
 			React.createElement( FullPostDialog, {
 				feedId: feedId,
 				postId: postId,
-				setPageTitle: setPageTitle,
 				onClose: function() {
 					page.back( context.lastRoute || '/' );
 				},

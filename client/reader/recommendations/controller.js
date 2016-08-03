@@ -10,7 +10,7 @@ import i18n from 'i18n-calypso';
  */
 import trackScrollPage from 'lib/track-scroll-page';
 import { setDocumentHeadTitle as setTitle } from 'state/document-head/actions';
-import { ensureStoreLoading, trackPageLoad, trackUpdatesLoaded, setPageTitle, userHasHistory } from 'reader/controller-helper';
+import { ensureStoreLoading, trackPageLoad, trackUpdatesLoaded, userHasHistory } from 'reader/controller-helper';
 import route from 'lib/route';
 import feedStreamFactory from 'lib/feed-stream-store';
 
@@ -65,7 +65,6 @@ export default {
 			React.createElement( RecommendedPostsStream, {
 				key: 'recommendations_posts',
 				store: RecommendedPostsStore,
-				setPageTitle: setPageTitle,
 				trackScrollPage: trackScrollPage.bind(
 					null,
 					basePath,

@@ -20,7 +20,7 @@ export function start( context ) {
 		fullAnalyticsPageTitle = analyticsPageTitle + ' > Start',
 		mcKey = 'start';
 
-	setPageTitle( i18n.translate( 'Start' ) );
+	setPageTitle( context, i18n.translate( 'Start' ) );
 
 	trackPageLoad( basePath, fullAnalyticsPageTitle, mcKey );
 	recordTrack( 'calypso_reader_recommendations_start_loaded' );

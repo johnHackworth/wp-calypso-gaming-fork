@@ -46,7 +46,7 @@ export function trackUpdatesLoaded( key ) {
 	} );
 }
 
-export function setPageTitle( title ) {
+export function setPageTitle( context, title ) {
 	context.store.dispatch( setTitle( i18n.translate( '%s ‹ Reader', { args: title } ) ) ); // FIXME: Auto-converted from the Flux setTitle action. Please use <DocumentHead> instead.
 }
 

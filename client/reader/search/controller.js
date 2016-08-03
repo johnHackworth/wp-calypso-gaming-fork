@@ -11,7 +11,7 @@ import qs from 'qs';
  */
 import feedStreamFactory from 'lib/feed-stream-store';
 import { recordTrack } from 'reader/stats';
-import { ensureStoreLoading, trackPageLoad, trackUpdatesLoaded, trackScrollPage, setPageTitle } from 'reader/controller-helper';
+import { ensureStoreLoading, trackPageLoad, trackUpdatesLoaded, trackScrollPage } from 'reader/controller-helper';
 
 const analyticsPageTitle = 'Reader';
 
@@ -43,7 +43,6 @@ export default {
 				key: 'search',
 				store: store,
 				query: searchSlug,
-				setPageTitle: setPageTitle,
 				trackScrollPage: trackScrollPage.bind(
 					null,
 					basePath,
