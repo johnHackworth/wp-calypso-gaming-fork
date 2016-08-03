@@ -7,7 +7,7 @@ import {
 	LAYOUT_NEXT_FOCUS_SET,
 } from 'state/action-types';
 
-const initialState = { current: null, previous: null, next: null };
+const initialState = { current: null, next: null };
 
 export default function layoutFocus( state = initialState, action ) {
 	switch ( action.type ) {
@@ -15,7 +15,7 @@ export default function layoutFocus( state = initialState, action ) {
 			if ( action.area === state.current ) {
 				return state;
 			}
-			return Object.assign( {}, state, { current: action.area, previous: state.current } );
+			return Object.assign( {}, state, { current: action.area } );
 		case LAYOUT_NEXT_FOCUS_SET:
 			if ( action.area === state.next ) {
 				return state;
@@ -32,7 +32,7 @@ export default function layoutFocus( state = initialState, action ) {
 			if ( ! next ) {
 				return state;
 			}
-			return Object.assign( {}, state, { current: next, previous: state.current, next: null } );
+			return Object.assign( {}, state, { current: next, next: null } );
 	}
 	return state;
 }
