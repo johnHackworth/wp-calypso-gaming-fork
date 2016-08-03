@@ -12,12 +12,17 @@ import StepHeader from 'signup/step-header';
 import Button from 'components/button';
 import { abtest } from 'lib/abtest';
 import { localize } from 'i18n-calypso';
+import analytics from 'lib/analytics';
 
 function redirectToPartner() {
 	if ( 'bluehostWithWoo' === abtest( 'signupStoreBenchmarking' ) ) {
-		window.location.href = 'https://www.bluehost.com/web-hosting/signup?flow=woocommerce';
+		analytics.tracks.recordEvent( 'calypso_triforce_partner_redirect', { partner_name: 'Bluehost with WooCommerce' } );
+
+		window.open( 'https://www.bluehost.com/web-hosting/signup?flow=woocommerce' );
 	} else {
-		window.location.href = 'https://www.bluehost.com/wordpress';
+		analytics.tracks.recordEvent( 'calypso_triforce_partner_redirect', { partner_name: 'Bluehost' } );
+
+		window.open( 'https://www.bluehost.com/wordpress' );
 	}
 }
 

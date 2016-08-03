@@ -11,11 +11,14 @@ import FormButton from 'components/forms/form-button';
 import StepHeader from 'signup/step-header';
 import Button from 'components/button';
 import { localize } from 'i18n-calypso';
+import analytics from 'lib/analytics';
 
 import SitegroundLogo from './siteground-logo';
 
 function redirectToPartner() {
-	window.location.href = 'https://www.siteground.com/woocommerce/step1.htm';
+	analytics.tracks.recordEvent( 'calypso_triforce_partner_redirect', { partner_name: 'Siteground' } );
+
+	window.open( 'https://www.siteground.com/woocommerce/step1.htm' );
 }
 
 export const SitegroundStoreStep = props => {
