@@ -33,7 +33,7 @@ import { isPersonal, isPremium, isBusiness } from 'lib/products-values';
 import { getCurrentUser } from 'state/current-user/selectors';
 import { setNextLayoutFocus, setLayoutFocus } from 'state/ui/layout-focus/actions';
 
-const MySitesSidebar = React.createClass( {
+export const MySitesSidebar = React.createClass( {
 	propTypes: {
 		setNextLayoutFocus: React.PropTypes.func.isRequired,
 		setLayoutFocus: React.PropTypes.func.isRequired,
