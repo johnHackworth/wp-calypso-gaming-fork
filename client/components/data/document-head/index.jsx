@@ -66,7 +66,7 @@ class DocumentHead extends Component {
 DocumentHead.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
-	unreadCount: PropTypes.number,
+	unreadCount: PropTypes.string, // E.g. '40+'
 	link: PropTypes.array,
 	meta: PropTypes.array,
 	setTitle: PropTypes.func.isRequired,
