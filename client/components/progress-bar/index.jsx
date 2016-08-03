@@ -27,11 +27,11 @@ module.exports = React.createClass( {
 	},
 
 	renderBar() {
-		var styles = { width: Math.ceil( this.props.value / this.props.total * 100 ) + '%' },
-			title = this.props.title
+		const title = this.props.title
 				? <span className="screen-reader-text">{ this.props.title }</span>
 				: null;
 
+		let styles = { width: Math.ceil( this.props.value / this.props.total * 100 ) + '%' };
 		if ( this.props.color ) {
 			styles.backgroundColor = this.props.color;
 		}
