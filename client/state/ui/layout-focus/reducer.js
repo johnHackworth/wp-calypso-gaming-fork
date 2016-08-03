@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import includes from 'lodash/includes';
-
-/**
  * Internal dependencies
  */
 import {
@@ -13,18 +8,16 @@ import {
 } from 'state/action-types';
 
 const initialState = { current: null, previous: null, next: null };
-const validAreas = [ 'content', 'sidebar', 'sites', 'preview' ];
-const isValidArea = area => includes( validAreas, area );
 
 export default function layoutFocus( state = initialState, action ) {
 	switch ( action.type ) {
 		case LAYOUT_FOCUS_SET:
-			if ( action.area === state.current || ! isValidArea( action.area ) ) {
+			if ( action.area === state.current ) {
 				return state;
 			}
 			return Object.assign( {}, state, { current: action.area, previous: state.current } );
 		case LAYOUT_NEXT_FOCUS_SET:
-			if ( action.area === state.next || ! isValidArea( action.area ) ) {
+			if ( action.area === state.next ) {
 				return state;
 			}
 			return Object.assign( {}, state, { next: action.area } );

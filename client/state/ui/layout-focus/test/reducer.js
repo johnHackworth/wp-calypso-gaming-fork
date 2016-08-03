@@ -35,13 +35,6 @@ describe( 'reducer', () => {
 			expect( state.previous ).to.equal( 'content' );
 		} );
 
-		it( 'does not set the current focus area if the value is invalid', function() {
-			const action = { type: LAYOUT_FOCUS_SET, area: 'foobar' };
-			const initialState = deepFreeze( { current: 'content', previous: null, next: null } );
-			const state = layoutFocus( initialState, action );
-			expect( state ).to.eql( initialState );
-		} );
-
 		it( 'does not set the current focus area if the value is the same', function() {
 			const action = { type: LAYOUT_FOCUS_SET, area: 'content' };
 			const initialState = { current: 'content', previous: null, next: null };
@@ -69,13 +62,6 @@ describe( 'reducer', () => {
 			const initialState = deepFreeze( { current: 'content', previous: 'sites', next: null } );
 			const state = layoutFocus( initialState, action );
 			expect( state.previous ).to.equal( initialState.previous );
-		} );
-
-		it( 'does not set the next focus area if the value is invalid', function() {
-			const action = { type: LAYOUT_NEXT_FOCUS_SET, area: 'foobar' };
-			const initialState = deepFreeze( { current: 'content', previous: null, next: null } );
-			const state = layoutFocus( initialState, action );
-			expect( state ).to.eql( initialState );
 		} );
 
 		it( 'does not set the next focus area if the value is the same', function() {
