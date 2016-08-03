@@ -19,9 +19,23 @@ import {
 
 class DocumentHead extends Component {
 	componentWillMount() {
-		this.props.setTitle( this.props.title );
-		this.props.setDescription( this.props.description );
-		this.props.setUnreadCount( this.props.unreadCount );
+		const {
+			title,
+			description,
+			unreadCount
+		} = this.props;
+
+		if ( title ) {
+			this.props.setTitle( title );
+		}
+
+		if ( description ) {
+			this.props.setDescription( description );
+		}
+
+		if ( unreadCount ) {
+			this.props.setUnreadCount( unreadCount );
+		}
 
 		each( this.props.link, ( link ) => {
 			this.props.addLink( link );
@@ -74,12 +88,6 @@ DocumentHead.propTypes = {
 	addLink: PropTypes.func.isRequired,
 	addMeta: PropTypes.func.isRequired,
 	setUnreadCount: PropTypes.func.isRequired
-};
-
-DocumentHead.defaultProps = {
-	title: '',
-	description: '',
-	unreadCount: ''
 };
 
 export default connect(
