@@ -655,7 +655,7 @@ module.exports = React.createClass( {
 	},
 
 	addNewSite: function() {
-		if ( this.props.user.get().visible_site_count > 1 ) {
+		if ( this.props.currentUser.visible_site_count > 1 ) {
 			return null;
 		}
 
