@@ -32,38 +32,44 @@ const Tooltip = React.createClass( {
 		const size = 20;
 
 		return (
-			<div>
-				tooltip context&nbsp;
-				<span
-					style={ {
-						width: size,
-						height: size,
-						lineHeight: `${ size }px`,
-						display: 'inline-block',
-						borderRadius: parseInt( size / 2 ),
-						backgroundColor: '#444',
-						color: 'white',
-						fontSize: '12px',
-						cursor: 'pointer',
-						textAlign: 'center',
-					} }
-					onMouseEnter={ this.open }
-					onMouseLeave={ this.close }
-					ref="tooltip-reference"
-				>
-					T
-				</span>
+			<div className="docs__design-assets-group">
+				<h2>
+					<a href="/devdocs/design/tooltip">Tooltip</a>
+				</h2>
 
-				<TooltipComponent
-					isVisible={ this.state.show }
-					onClose={ this.close }
-					position={ this.state.position }
-					context={ this.refs && this.refs[ 'tooltip-reference' ] }
-				>
-					<div style={ { padding: '10px' } }>
-						Simple Tooltip Instance
-					</div>
-				</TooltipComponent>
+				<div>
+					tooltip context&nbsp;
+					<span
+						style={ {
+							width: size,
+							height: size,
+							lineHeight: `${ size }px`,
+							display: 'inline-block',
+							borderRadius: parseInt( size / 2 ),
+							backgroundColor: '#444',
+							color: 'white',
+							fontSize: '12px',
+							cursor: 'pointer',
+							textAlign: 'center',
+						} }
+						onMouseEnter={ this.open }
+						onMouseLeave={ this.close }
+						ref="tooltip-reference"
+					>
+						T
+					</span>
+
+					<TooltipComponent
+						isVisible={ this.state.show }
+						onClose={ this.close }
+						position={ this.state.position }
+						context={ this.refs && this.refs[ 'tooltip-reference' ] }
+					>
+						<div style={ { padding: '10px' } }>
+							Simple Tooltip Instance
+						</div>
+					</TooltipComponent>
+				</div>
 			</div>
 		);
 	}
