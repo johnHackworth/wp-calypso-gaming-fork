@@ -79,7 +79,7 @@ DocumentHead.propTypes = {
 DocumentHead.defaultProps = {
 	title: '',
 	description: '',
-	unreadCount: 0
+	unreadCount: ''
 };
 
 export default connect(
