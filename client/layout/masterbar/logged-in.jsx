@@ -126,4 +126,5 @@ const MasterbarLoggedIn = React.createClass( {
 	}
 } );
 
-export default connect( null, { setNextLayoutFocus } )( MasterbarLoggedIn );
+// TODO: make this pure when sites can be retrieved from the Redux state
+export default connect( null, { setNextLayoutFocus }, null, { pure: false } )( MasterbarLoggedIn );
