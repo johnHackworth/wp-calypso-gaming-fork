@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
@@ -15,10 +16,9 @@ import Gravatar from 'components/gravatar';
 import config from 'config';
 import { preload } from 'sections-preload';
 import ResumeEditing from 'my-sites/resume-editing';
+import { setNextLayoutFocus } from 'state/ui/layout-focus/actions';
 
-export default React.createClass( {
-	displayName: 'Masterbar',
-
+const MasterbarLoggedIn = React.createClass( {
 	propTypes: {
 		user: React.PropTypes.object,
 		sites: React.PropTypes.object,
@@ -125,3 +125,5 @@ export default React.createClass( {
 		);
 	}
 } );
+
+export default connect( null, { setNextLayoutFocus } )( MasterbarLoggedIn );
