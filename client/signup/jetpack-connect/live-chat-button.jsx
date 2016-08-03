@@ -18,6 +18,10 @@ export default React.createClass( {
 	},
 
 	render() {
+		if ( ! this.props.userModule.get() ) {
+			return null;
+		}
+
 		return (
 			<div className="jetpack-connect__live-chat">
 				<Button compact borderless onClick={ this.handleClick }>

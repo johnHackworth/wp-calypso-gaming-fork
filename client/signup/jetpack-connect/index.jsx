@@ -306,7 +306,7 @@ const JetpackConnectMain = React.createClass( {
 
 					{ this.renderSiteInput( status ) }
 					{ this.renderFooter() }
-					<LiveChatButton />
+					<LiveChatButton { ...this.props } />
 				</div>
 			</Main>
 		);
@@ -327,7 +327,7 @@ const JetpackConnectMain = React.createClass( {
 
 					{ this.renderSiteInput( status ) }
 					{ this.renderFooter() }
-					<LiveChatButton />
+					<LiveChatButton { ...this.props } />
 				</div>
 			</Main>
 		);
@@ -366,7 +366,7 @@ const JetpackConnectMain = React.createClass( {
 						<div>{ this.renderBackButton() }</div>
 					</div>
 				</div>
-				<LiveChatButton />
+				<LiveChatButton { ...this.props } />
 			</Main>
 		);
 	},
@@ -421,7 +421,7 @@ const JetpackConnectMain = React.createClass( {
 						{ this.renderBackButton() }
 					</div>
 				</div>
-				<LiveChatButton />
+				<LiveChatButton { ...this.props } />
 			</Main>
 		);
 	},
