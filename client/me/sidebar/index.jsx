@@ -25,8 +25,6 @@ import { getCurrentUser } from 'state/current-user/selectors';
 
 const MeSidebar = React.createClass( {
 
-	displayName: 'MeSidebar',
-
 	mixins: [ eventRecorder ],
 
 	componentDidMount: function() {
