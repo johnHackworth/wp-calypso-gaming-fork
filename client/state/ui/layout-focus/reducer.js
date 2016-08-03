@@ -22,12 +22,11 @@ export default function layoutFocus( state = initialState, action ) {
 			}
 			return Object.assign( {}, state, { next: action.area } );
 		case LAYOUT_NEXT_FOCUS_ACTIVATE:
-			// If we don't have a change queued and the focus has changed
-			// previously, set it to `content`. This avoids having to set the
-			// focus to content on all navigation links because it becomes the
-			// default after focus has shifted.
+			// If we don't have a change queued, set it to `content`. This avoids
+			// having to set the focus to content on all navigation links because it
+			// becomes the default after focus has shifted.
 			let next = state.next;
-			if ( ! next && state.previous !== null ) {
+			if ( ! next && state.current !== 'content' ) {
 				next = 'content';
 			}
 			if ( ! next ) {

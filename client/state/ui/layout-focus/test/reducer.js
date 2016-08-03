@@ -80,9 +80,9 @@ describe( 'reducer', () => {
 			expect( state.current ).to.equal( 'sidebar' );
 		} );
 
-		it( 'sets the current focus area to "content" if the previous focus is set and no next state exists', function() {
+		it( 'sets the current focus area to "content" if no next state exists', function() {
 			const action = { type: LAYOUT_NEXT_FOCUS_ACTIVATE };
-			const initialState = { current: 'preview', previous: 'sites', next: null };
+			const initialState = { current: 'preview', previous: null, next: null };
 			const state = layoutFocus( initialState, action );
 			expect( state.current ).to.equal( 'content' );
 		} );
@@ -101,11 +101,18 @@ describe( 'reducer', () => {
 			expect( state.next ).to.equal( null );
 		} );
 
-		it( 'does not take any action if the previous focus is not set and no next state exists', function() {
+		it( 'sets the next focus area to null when complete even if next and current are the same', function() {
 			const action = { type: LAYOUT_NEXT_FOCUS_ACTIVATE };
-			const initialState = deepFreeze( { current: 'content', previous: null, next: null } );
+			const initialState = { current: 'sidebar', previous: null, next: 'sidebar' };
 			const state = layoutFocus( initialState, action );
-			expect( state ).to.eql( initialState );
+			expect( state.next ).to.equal( null );
+		} );
+
+		it( 'does not take any action if the current focus is already "content" and no next state exists', function() {
+			const action = { type: LAYOUT_NEXT_FOCUS_ACTIVATE };
+			const initialState = { current: 'content', previous: null, next: null };
+			const state = layoutFocus( initialState, action );
+			expect( state ).to.equal( initialState );
 		} );
 	} );
 } );
