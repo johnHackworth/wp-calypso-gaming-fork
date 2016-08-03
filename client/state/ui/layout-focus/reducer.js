@@ -33,10 +33,14 @@ export default function layoutFocus( state = initialState, action ) {
 			// previously, set it to `content`. This avoids having to set the
 			// focus to content on all navigation links because it becomes the
 			// default after focus has shifted.
-			if ( ! state.next && ! state.previous ) {
+			let next = state.next;
+			if ( ! next && state.previous !== null ) {
+				next = 'content';
+			}
+			if ( ! next ) {
 				return state;
 			}
-			return Object.assign( {}, state, { current: state.next || 'content', previous: state.current, next: null } );
+			return Object.assign( {}, state, { current: next, previous: state.current, next: null } );
 	}
 	return state;
 }
