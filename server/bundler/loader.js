@@ -10,6 +10,7 @@ function getSectionsModule( sections ) {
 		dependencies = [
 			"var page = require( 'page' ),",
 			"\tReact = require( 'react' ),",
+			"\tactivateNextLayoutFocus = require( 'state/ui/layout-focus/actions' ).activateNextLayoutFocus,",
 			"\tLoadingError = require( 'layout/error' ),",
 			"\tcontroller = require( 'controller' ),",
 			"\tpreloadHub = require( 'sections-preload' ).hub;",
@@ -83,7 +84,7 @@ function splitTemplate( path, section ) {
 		'page( ' + pathRegex + ', function( context, next ) {',
 		'	if ( _loadedSections[ ' + JSON.stringify( section.module ) + ' ] ) {',
 		'		controller.setSection( ' + JSON.stringify( section ) + ' )( context );',
-		'		context.store.dispatch( { type: "LAYOUT_NEXT_FOCUS_ACTIVATE" } );',
+		'		context.store.dispatch( activateNextLayoutFocus() );',
 		'		return next();',
 		'	}',
 		'	context.store.dispatch( { type: "SECTION_SET", isLoading: true } );',
@@ -103,7 +104,7 @@ function splitTemplate( path, section ) {
 		'			require( ' + JSON.stringify( section.module ) + ' )( controller.clientRouter );',
 		'			_loadedSections[ ' + JSON.stringify( section.module ) + ' ] = true;',
 		'		}',
-		'		context.store.dispatch( { type: "LAYOUT_NEXT_FOCUS_ACTIVATE" } );',
+		'		context.store.dispatch( activateNextLayoutFocus() );',
 		'		next();',
 		'	}, ' + JSON.stringify( section.name ) + ' );',
 		'} );\n'
