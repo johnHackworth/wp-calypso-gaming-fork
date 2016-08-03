@@ -248,21 +248,23 @@ module.exports = {
 		} );
 
 		ReactDom.render(
-			React.createElement( FeedStream, {
-				key: 'feed-' + context.params.feed_id,
-				store: feedStore,
-				feedId: context.params.feed_id,
-				trackScrollPage: trackScrollPage.bind(
-					null,
-					basePath,
-					fullAnalyticsPageTitle,
-					analyticsPageTitle,
-					mcKey
-				),
-				onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
-				suppressSiteNameLink: true,
-				showBack: userHasHistory( context )
-			} ),
+			React.createElement( ReduxProvider, { store: context.store },
+				React.createElement( FeedStream, {
+					key: 'feed-' + context.params.feed_id,
+					store: feedStore,
+					feedId: context.params.feed_id,
+					trackScrollPage: trackScrollPage.bind(
+						null,
+						basePath,
+						fullAnalyticsPageTitle,
+						analyticsPageTitle,
+						mcKey
+					),
+					onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
+					suppressSiteNameLink: true,
+					showBack: userHasHistory( context )
+				} )
+			),
 			document.getElementById( 'primary' )
 		);
 	},
@@ -282,21 +284,23 @@ module.exports = {
 		} );
 
 		ReactDom.render(
-			React.createElement( SiteStream, {
-				key: 'site-' + context.params.blog_id,
-				store: feedStore,
-				siteId: context.params.blog_id,
-				trackScrollPage: trackScrollPage.bind(
-					null,
-					basePath,
-					fullAnalyticsPageTitle,
-					analyticsPageTitle,
-					mcKey
-				),
-				onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
-				suppressSiteNameLink: true,
-				showBack: userHasHistory( context )
-			} ),
+			React.createElement( ReduxProvider, { store: context.store },
+				React.createElement( SiteStream, {
+					key: 'site-' + context.params.blog_id,
+					store: feedStore,
+					siteId: context.params.blog_id,
+					trackScrollPage: trackScrollPage.bind(
+						null,
+						basePath,
+						fullAnalyticsPageTitle,
+						analyticsPageTitle,
+						mcKey
+					),
+					onUpdatesShown: trackUpdatesLoaded.bind( null, mcKey ),
+					suppressSiteNameLink: true,
+					showBack: userHasHistory( context )
+				} )
+			),
 			document.getElementById( 'primary' )
 		);
 	},
