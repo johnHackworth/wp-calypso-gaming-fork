@@ -169,4 +169,5 @@ const CurrentSite = React.createClass( {
 	}
 } );
 
-module.exports = connect( null, { setLayoutFocus } )( CurrentSite );
+// TODO: make this pure when sites can be retrieved from the Redux state
+module.exports = connect( null, { setLayoutFocus }, null, { pure: false } )( CurrentSite );
