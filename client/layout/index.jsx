@@ -40,7 +40,6 @@ import { isOffline } from 'state/application/selectors';
 import { hasSidebar } from 'state/ui/selectors';
 import DesignPreview from 'my-sites/design-preview';
 import { getCurrentLayoutFocus } from 'state/ui/layout-focus/selectors';
-import { setNextLayoutFocus } from 'state/ui/layout-focus/actions';
 
 if ( config.isEnabled( 'keyboard-shortcuts' ) ) {
 	KeyboardShortcutsMenu = require( 'lib/keyboard-shortcuts/menu' );
@@ -120,7 +119,6 @@ Layout = React.createClass( {
 				user={ this.props.user }
 				section={ this.props.section.group }
 				sites={ this.props.sites }
-				setNextLayoutFocus={ this.props.setNextLayoutFocus }
 			/>
 		);
 	},
@@ -216,7 +214,4 @@ export default connect(
 			currentLayoutFocus: getCurrentLayoutFocus( state ),
 		};
 	},
-	{
-		setNextLayoutFocus,
-	}
 )( Layout );
