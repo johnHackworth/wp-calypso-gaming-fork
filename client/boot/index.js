@@ -56,7 +56,7 @@ var config = require( 'config' ),
 	Layout;
 
 import { getSelectedSiteId, getSectionName, isSectionIsomorphic } from 'state/ui/selectors';
-import { setLayoutFocus, activateNextLayoutFocus } from 'state/ui/layout-focus/actions';
+import { setNextLayoutFocus, activateNextLayoutFocus } from 'state/ui/layout-focus/actions';
 
 function init() {
 	var i18nLocaleStringsObject = null;
@@ -262,8 +262,8 @@ function reduxStoreReady( reduxStore ) {
 	page( '*', function( context, next ) {
 		if ( [ 'sb', 'sp' ].indexOf( context.querystring ) !== -1 ) {
 			layoutSection = ( context.querystring === 'sb' ) ? 'sidebar' : 'sites';
-			reduxStore.dispatch( setLayoutFocus( layoutSection ) );
-			page.redirect( context.pathname );
+			reduxStore.dispatch( setNextLayoutFocus( layoutSection ) );
+			page.replace( context.pathname );
 		}
 
 		next();
