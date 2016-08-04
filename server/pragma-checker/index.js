@@ -19,6 +19,9 @@ var IGNORED_MODULES = [
 	'lib/upgrades/actions', // nooped on the server as it still uses the singleton Flux architecture
 	'i18n-calypso', // ignore this until we make it work properly on the server
 	'my-sites/themes/thanks-modal', // stubbed on the server until we develop an isomorphic version
+	'components/web-preview', // stubbed on the server until we develop an isomorphic version
+	'state', // stubbed on the server until we develop an isomorphic version
+	'state/sites/plans/selectors', // stubbed on the server until we develop an isomorphic version
 	'my-sites/themes/themes-site-selector-modal' // stubbed on the server until we develop an isomorphic version
 ];
 
